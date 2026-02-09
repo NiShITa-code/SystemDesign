@@ -1,6 +1,6 @@
 # Key-Value Store – System Design
 
-## 🧩 Problem
+## Problem
 Design a distributed key-value store supporting:
 - `put(key, value)`
 - `get(key)`
@@ -120,7 +120,7 @@ A pragmatic write/read path inspired by LSM-based systems:
 
 ---
 
-## 📚 References
+## References
 - Amazon DynamoDB: https://aws.amazon.com/dynamodb/
 - Memcached: https://memcached.org/
 - Redis: https://redis.io/
