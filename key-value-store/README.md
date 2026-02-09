@@ -13,7 +13,7 @@ Assumptions:
 
 ---
 
-## ✅ Requirements
+## Requirements
 
 ### Functional Requirements
 - Store and retrieve values by unique key.
@@ -29,7 +29,7 @@ Assumptions:
 
 ---
 
-## 🏗️ High-Level Design Choices
+## High-Level Design Choices
 
 ### 1) Data Partitioning
 Use **consistent hashing** to distribute keys across a ring of nodes.
@@ -74,7 +74,7 @@ Use **versioning** with **vector clocks** for concurrent write conflict detectio
 
 ---
 
-## ⚖️ CAP Tradeoff Recommendation
+## CAP Tradeoff Recommendation
 In real systems, partition tolerance is mandatory.
 So practical systems choose between:
 - **CP** (consistency + partition tolerance): safer correctness, lower availability during partition.
@@ -85,7 +85,7 @@ Default interview recommendation: **AP + eventual consistency + quorum tuning**.
 
 ---
 
-## 🧱 Failure Handling
+## Failure Handling
 
 ### Failure Detection
 Use **gossip protocol** with heartbeats and membership lists.
@@ -105,7 +105,7 @@ Replicate across multiple data centers/regions so one region outage does not sto
 
 ---
 
-## ✍️ Storage Engine Direction (Practical)
+## Storage Engine Direction (Practical)
 A pragmatic write/read path inspired by LSM-based systems:
 
 ### Write Path
@@ -117,35 +117,6 @@ A pragmatic write/read path inspired by LSM-based systems:
 1. Check in-memory cache/memtable.
 2. Use Bloom filters to locate likely SSTables.
 3. Read from SSTables and reconcile latest version.
-
----
-
-## 📦 What to include in this repo for this topic
-
-### Must have
-- This README with requirements, tradeoffs, and architecture decisions.
-- One architecture diagram (hash ring, replication, coordinator, read/write flow).
-
-### Nice to have
-- Sequence diagrams for `put` and `get`.
-- Failure scenario diagrams (partition, hinted handoff, repair).
-- Small simulation (optional) for quorum behavior and conflict resolution.
-- Included mini implementation under `key-value-store/implementation/`.
-
-### Optional mini implementation
-A minimal educational implementation can include:
-- In-memory consistent hash ring.
-- `put/get` with configurable `N/W/R`.
-- Simple version metadata and conflict detection.
-- Tests for quorum and conflict behavior.
-
-Keep this intentionally small and clearly marked as non-production.
-
-Implemented in this repo:
-- `key-value-store/implementation/kv_store.py`
-- `key-value-store/implementation/test_kv_store.py`
-- `key-value-store/implementation/cpp/kv_store.hpp`
-- `key-value-store/implementation/cpp/test_kv_store.cpp`
 
 ---
 
